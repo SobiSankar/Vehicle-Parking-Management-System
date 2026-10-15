@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Vehicle Entry{% endblock %}
+{% block content %}
+<div class="card">
+    <h1>Vehicle Entry</h1>
+    <form method="post" class="form-grid" id="vehicle-entry-form" novalidate>
+        <label>Vehicle Number
+            <input type="text" name="vehicle_number" required />
+        </label>
+        <label>Owner Name
+            <input type="text" name="owner_name" required />
+        </label>
+        <label>Contact Number
+            <input type="text" name="contact_number" required pattern="[0-9]{10}" />
+        </label>
+        <label>Vehicle Type
+            <select name="vehicle_type" required>
+                <option value="">Select</option>
+                {% for type, rate in rates.items() %}
+                    <option value="{{ type }}">{{ type }} (₹{{ rate }}/hour)</option>
+                {% endfor %}
+            </select>
+        </label>
+        <label>Parking Slot (optional)
+            <select name="slot_id">
+                <option value="">Auto Allocate</option>
+                {% for slot in available_slots %}
+                    <option value="{{ slot.id }}">{{ slot.slot_number }}</option>
+                {% endfor %}
+            </select>
+        </label>
+        <button type="submit">Park Vehicle</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Parking Slots{% endblock %}
+{% block content %}
+<h1>Parking Slots</h1>
+<div class="card">
+    <table>
+        <thead><tr><th>Slot</th><th>Status</th><th>Supported Type</th><th>Current Vehicle</th></tr></thead>
+        <tbody>
+        {% for slot in slots %}
+            <tr>
+                <td>{{ slot.slot_number }}</td>
+                <td><span class="status {{ 'ok' if slot.status == 'Available' else 'warn' }}">{{ slot.status }}</span></td>
+                <td>{{ slot.supported_vehicle_type or 'Any' }}</td>
+                <td>{{ slot.vehicle_number or '-' }}</td>
+            </tr>
+        {% else %}
+            <tr><td colspan="4">No slots configured.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

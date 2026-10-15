@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Vehicle Details{% endblock %}
+{% block content %}
+<div class="card">
+    <h1>Vehicle Details</h1>
+    <dl class="details-grid">
+        <dt>Vehicle Number</dt><dd>{{ record.vehicle_number }}</dd>
+        <dt>Owner Name</dt><dd>{{ record.owner_name }}</dd>
+        <dt>Contact</dt><dd>{{ record.contact_number }}</dd>
+        <dt>Vehicle Type</dt><dd>{{ record.vehicle_type }}</dd>
+        <dt>Slot</dt><dd>{{ record.slot_number }}</dd>
+        <dt>Entry Time</dt><dd>{{ record.entry_time }}</dd>
+        <dt>Exit Time</dt><dd>{{ record.exit_time or 'Still parked' }}</dd>
+        <dt>Parking Fee</dt><dd>{{ ('₹' ~ record.parking_fee) if record.parking_fee is not none else 'Pending' }}</dd>
+    </dl>
+</div>
+{% endblock %}
