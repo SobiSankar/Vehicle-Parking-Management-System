@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h1>Dashboard</h1>
+<div class="stats-grid">
+    <div class="stat-card"><h3>Total Vehicles</h3><p>{{ total_vehicles }}</p></div>
+    <div class="stat-card"><h3>Currently Parked</h3><p>{{ currently_parked }}</p></div>
+    <div class="stat-card"><h3>Available Slots</h3><p>{{ available_slots }}</p></div>
+    <div class="stat-card"><h3>Total Revenue</h3><p>₹{{ '%.2f'|format(total_revenue) }}</p></div>
+</div>
+
+<div class="card">
+    <h2>Currently Parked (Recent)</h2>
+    <table>
+        <thead><tr><th>Vehicle</th><th>Owner</th><th>Type</th><th>Slot</th><th>Entry Time</th></tr></thead>
+        <tbody>
+        {% for row in recent_records %}
+            <tr>
+                <td>{{ row.vehicle_number }}</td>
+                <td>{{ row.owner_name }}</td>
+                <td>{{ row.vehicle_type }}</td>
+                <td>{{ row.slot_number }}</td>
+                <td>{{ row.entry_time }}</td>
+            </tr>
+        {% else %}
+            <tr><td colspan="5">No active parked vehicles.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

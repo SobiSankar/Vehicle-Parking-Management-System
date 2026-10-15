@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Not Found{% endblock %}
+{% block content %}
+<div class="card">
+    <h1>Page Not Found</h1>
+    <p>The page you are trying to access does not exist.</p>
+    <a class="btn-link" href="{{ url_for('dashboard') if session.get('admin_id') else url_for('login') }}">Go Back</a>
+</div>
+{% endblock %}

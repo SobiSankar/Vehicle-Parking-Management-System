@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Reports{% endblock %}
+{% block content %}
+<h1>Parking Reports</h1>
+<div class="card">
+    <form method="get" class="inline-form">
+        <label>Date <input type="date" name="date" value="{{ filter_date }}" /></label>
+        <label>Vehicle Number <input type="text" name="vehicle_number" value="{{ vehicle_number }}" /></label>
+        <button type="submit">Apply Filters</button>
+        <a class="btn-link" href="{{ url_for('reports') }}">Reset</a>
+    </form>
+    <p><strong>Total Revenue (filtered):</strong> ₹{{ '%.2f'|format(total_revenue) }}</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Vehicle</th><th>Owner</th><th>Type</th><th>Slot</th><th>Entry</th><th>Exit</th><th>Fee</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for row in records %}
+            <tr>
+                <td>{{ row.vehicle_number }}</td>
+                <td>{{ row.owner_name }}</td>
+                <td>{{ row.vehicle_type }}</td>
+                <td>{{ row.slot_number }}</td>
+                <td>{{ row.entry_time }}</td>
+                <td>{{ row.exit_time or '-' }}</td>
+                <td>{{ ('₹' ~ row.parking_fee) if row.parking_fee is not none else '-' }}</td>
+            </tr>
+        {% else %}
+            <tr><td colspan="7">No records found.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

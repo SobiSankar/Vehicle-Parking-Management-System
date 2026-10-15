@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Confirm Exit{% endblock %}
+{% block content %}
+<div class="card">
+    <h1>Exit Confirmation</h1>
+    <p><strong>Vehicle:</strong> {{ record.vehicle_number }}</p>
+    <p><strong>Slot:</strong> {{ record.slot_number }}</p>
+    <p><strong>Duration:</strong> {{ duration_hours }} hours</p>
+    <p><strong>Total Fee:</strong> ₹{{ '%.2f'|format(fee) }}</p>
+    <form method="post">
+        <button type="submit">Confirm Exit</button>
+        <a class="btn-link" href="{{ url_for('parked_vehicles') }}">Cancel</a>
+    </form>
+</div>
+{% endblock %}

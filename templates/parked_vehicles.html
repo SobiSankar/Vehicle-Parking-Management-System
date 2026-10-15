@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Parked Vehicles{% endblock %}
+{% block content %}
+<h1>Parked Vehicles</h1>
+<div class="card">
+    <form method="get" class="inline-form">
+        <input type="text" name="search" placeholder="Search by vehicle number" value="{{ search }}" />
+        <button type="submit">Search</button>
+        <a class="btn-link" href="{{ url_for('parked_vehicles') }}">Reset</a>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Vehicle Number</th><th>Owner</th><th>Contact</th><th>Type</th><th>Slot</th><th>Entry</th><th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for row in records %}
+            <tr>
+                <td>{{ row.vehicle_number }}</td>
+                <td>{{ row.owner_name }}</td>
+                <td>{{ row.contact_number }}</td>
+                <td>{{ row.vehicle_type }}</td>
+                <td>{{ row.slot_number }}</td>
+                <td>{{ row.entry_time }}</td>
+                <td>
+                    <a class="btn-link" href="{{ url_for('vehicle_details', record_id=row.id) }}">Details</a>
+                    <a class="btn-link danger" href="{{ url_for('vehicle_exit', record_id=row.id) }}">Exit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr><td colspan="7">No active parked vehicles.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

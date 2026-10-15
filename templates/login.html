@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Admin Login{% endblock %}
+{% block content %}
+<div class="card auth-card">
+    <h1>Admin Login</h1>
+    <p class="muted">Use default credentials: <strong>admin / admin123</strong></p>
+    <form method="post" class="form-grid" novalidate>
+        <label>Username
+            <input type="text" name="username" required />
+        </label>
+        <label>Password
+            <input type="password" name="password" required />
+        </label>
+        <button type="submit">Login</button>
+    </form>
+</div>
+{% endblock %}
