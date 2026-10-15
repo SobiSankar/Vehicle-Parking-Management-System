@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block title %}Reports{% endblock %}
+{% block content %}
+<section class="card">
+    <h2>Daily Revenue Report</h2>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Exited Vehicles</th>
+                    <th>Revenue</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in daily_revenue %}
+                    <tr>
+                        <td>{{ row['day'] }}</td>
+                        <td>{{ row['exited_vehicles'] }}</td>
+                        <td>₹{{ '%.2f'|format(row['revenue']) }}</td>
+                    </tr>
+                {% else %}
+                    <tr><td colspan="3" class="empty">No revenue data yet.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="card">
+    <h2>Parking History</h2>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Vehicle #</th>
+                    <th>Owner</th>
+                    <th>Contact</th>
+                    <th>Type</th>
+                    <th>Slot</th>
+                    <th>Entry</th>
+                    <th>Exit</th>
+                    <th>Status</th>
+                    <th>Fee</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in history_rows %}
+                    <tr>
+                        <td>{{ row['vehicle_number'] }}</td>
+                        <td>{{ row['owner_name'] }}</td>
+                        <td>{{ row['contact_number'] }}</td>
+                        <td>{{ row['vehicle_type'] }}</td>
+                        <td>{{ row['slot_number'] }}</td>
+                        <td>{{ row['entry_time']|fmt_dt }}</td>
+                        <td>{{ row['exit_time']|fmt_dt }}</td>
+                        <td>{{ row['status'] }}</td>
+                        <td>₹{{ '%.2f'|format(row['fee']) }}</td>
+                    </tr>
+                {% else %}
+                    <tr><td colspan="9" class="empty">No history records yet.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

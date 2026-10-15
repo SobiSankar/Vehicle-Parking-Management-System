@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Admin Login{% endblock %}
+{% block content %}
+<section class="card login-card">
+    <h2>Admin Login</h2>
+    <form method="POST" class="form-grid">
+        <label>Username
+            <input type="text" name="username" required maxlength="50" />
+        </label>
+        <label>Password
+            <input type="password" name="password" required minlength="6" />
+        </label>
+        <button type="submit">Login</button>
+    </form>
+    <p class="hint">Default login: admin / admin123</p>
+</section>
+{% endblock %}
