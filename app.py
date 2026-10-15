@@ -22,6 +22,7 @@ VEHICLE_RATES_PER_HOUR = {
 
 def get_db():
     if "db" not in g:
+        os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
         g.db = sqlite3.connect(DB_PATH)
         g.db.row_factory = sqlite3.Row
         g.db.execute("PRAGMA foreign_keys = ON")
@@ -367,4 +368,5 @@ with app.app_context():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    debug_mode = os.getenv("FLASK_DEBUG", "0") == "1"
+    app.run(debug=debug_mode)
